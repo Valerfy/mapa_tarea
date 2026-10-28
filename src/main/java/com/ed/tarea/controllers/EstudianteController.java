@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ed.tarea.model.Estudiante;
 
@@ -27,4 +29,10 @@ public class EstudianteController {
     public ResponseEntity<Object> getEstudiantes(){
         return new ResponseEntity<>(estudiantes.values(), HttpStatus.OK);
     }
+
+    @PostMapping("/registrar")
+    public ResponseEntity<Object> registrarEstudiante(@RequestBody Estudiante est) {
+    estudiantes.put(est.getCodigo(), est);
+    return new ResponseEntity<>("Estudiante registrado correctamente"+est.getCodigo(), HttpStatus.CREATED);
+}
 }
